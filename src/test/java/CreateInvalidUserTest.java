@@ -76,8 +76,8 @@ public class CreateInvalidUserTest {
         // Если пользователь успешно создан, получаем токен доступа и пытаемся создать его снова
         if (responseCreate.statusCode() == 200) {
             accessToken = responseCreate.then().extract().path("accessToken");
-            Response responseCreate2 = userRequests.createUser(user);
-            responseCreate2.then().log().all().statusCode(403).body("success", equalTo(false)).body("message", equalTo("User already exists"));
+            Response responseCreateDouble = userRequests.createUser(user);
+            responseCreateDouble.then().log().all().statusCode(403).body("success", equalTo(false)).body("message", equalTo("User already exists"));
         }
     }
 
